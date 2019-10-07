@@ -23,6 +23,7 @@ function checkRequestedInput(projName) {
   const basePath = ensureDirectory(projName)
   createTemplateFile(basePath, 'index.js')
   createTemplateFile(basePath, 'README.md', projName)
+  createTemplateFile(basePath, '.gitignore')
 }
 
 function ensureDirectory(pathName) {
@@ -34,7 +35,13 @@ function ensureDirectory(pathName) {
 function createTemplateFile(basePath, fileName, projName) {
   const targetFile = path.join(basePath, fileName);
   if (!fs.existsSync(targetFile)) {
-    fs.writeFileSync(targetFile, `# ${projName}`, 'utf8');
+    if (fileName === 'README.md') {
+      fs.writeFileSync(targetFile, `# ${projName}`, 'utf8');
+    } else if (fileName === '.gitignore') {
+      fs.writeFileSync(targetFile, 'node_modules', 'utf8');
+    } else {
+      fs.writeFileSync(targetFile, '', 'utf8');
+    }
   } else {
     console.error('OOPs file already exists:', targetFile);
   }

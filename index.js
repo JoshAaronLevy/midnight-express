@@ -2,36 +2,27 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
+'use strict';
+var inquirer = require('inquirer');
 
-// const program = require('commander');
+var questions = [
+  {
+    type: 'input',
+    name: 'project_name',
+    message: "Project name"
+  }
+];
 
-// program
-//   .command('new <template>', 'create a new scaffolded template')
-//   .action(function (template, opts) {
-//     console.log('creating template "' + template + '"')
-//   })
+inquirer.prompt(questions).then(answers => {
+  const projName = answers.project_name
+  console.log(JSON.stringify(answers, null, 2));
+  checkRequestedInput(projName);
+});
 
-// .command('cry [service]', 'makes angular work');
-
-// program
-//   .option('-f, --float <number>', 'float argument', parseFloat)
-//   .option('-i, --integer <number>', 'integer argument', myParseInt)
-//   .option('-v, --verbose', 'verbosity that can be increased', increaseVerbosity, 0)
-//   .option('-c, --collect <value>', 'repeatable value', collect, [])
-//   .option('-l, --list <items>', 'comma separated list', commaSeparatedList)
-// ;
-
-// program.parse(process.argv);
-
-function checkRequestedInput() {
-  if (process.argv.length < 4)
-    throw new Error('Make sure you give 2 arguments!');
-  const [runtime, scriptName, command, option] = process.argv;
-  console.log(`Script was asked to ${command} with ${option}!!! :catdance:`);
-  
-  const basePath = ensureDirectory(option)
+function checkRequestedInput(projName) {
+  const basePath = ensureDirectory(projName)
   createTemplateFile(basePath, 'index.js')
-  console.log('\n\nDUNZOS!')
+  createTemplateFile(basePath, 'README.md', projName)
 }
 
 function ensureDirectory(pathName) {
@@ -40,14 +31,13 @@ function ensureDirectory(pathName) {
   return pathToVerify;
 }
 
-function createTemplateFile(basePath, fileName) {
+function createTemplateFile(basePath, fileName, projName) {
   const targetFile = path.join(basePath, fileName);
   if (!fs.existsSync(targetFile)) {
-    fs.writeFileSync(targetFile, `TEST!`, 'utf8');
+    fs.writeFileSync(targetFile, `# ${projName}`, 'utf8');
   } else {
     console.error('OOPs file already exists:', targetFile);
   }
   return targetFile;
 }
 
-checkRequestedInput();

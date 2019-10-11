@@ -13,22 +13,15 @@ let questions = [
     message: 'Project name'
   },
   {
-    type: 'confirm',
-    name: 'customRoute',
-    message: 'Would you like to set up an initial custom route? (default: puppies)',
-  },
-  {
     type: 'input',
     name: 'routeName',
-    message: 'What is the name of your custom route? (i.e. dogs)',
-    when: function(answers) {
-      return answers.customRoute;
-    }
+    message: 'What would you like to name the sample API route?',
+    default: 'puppies'
   },
   {
     type: 'confirm',
     name: 'dbSetup',
-    message: 'Would you like to set up a database?',
+    message: 'Would you like to set up a database?'
   },
   {
     type: 'list',
@@ -94,25 +87,23 @@ let questions = [
 
 inquirer.prompt(questions).then(answers => {
   const projName = answers.project_name;
+  const routeName = answers.routeName;
   console.log(JSON.stringify(answers, null, 2));
-  checkRequestedInput(projName, answers);
+  const pathToVerify = path.join(__dirname, projName);
+  if (!fs.existsSync(pathToVerify)) {
+    checkRequestedInput(projName, routeName);
+  } else {
+    console.error(`Directory ${projName} already exists in ${__dirname}. Please try another name for the project.`)
+  }
 });
 
-function checkRequestedInput(projName) {
+function checkRequestedInput(projName, routeName) {
   const basePath = ensureDirectory(projName);
   const routePath = ensureRouteDirectory(projName, 'routes');
-  // if (answers.customRoute) {
-  //   console.log('Creating custom route')
-  //   const customRouteName = answers.routeName;
-  //   createTemplateFile(routePath, `${customRouteName}.js`);
-  // } else {
-  //   console.log('Creating default route')
-  //   createTemplateFile(routePath, 'puppies.js');
-  // }
   createTemplateFile(basePath, 'index.js');
   createTemplateFile(basePath, 'README.md', projName);
   createTemplateFile(basePath, '.gitignore');
-  createRouteFile(routePath, 'puppies.js');
+  createRouteFile(routePath, `${routeName}.js`);
 }
 
 function ensureDirectory(projName) {
@@ -145,9 +136,6 @@ function createTemplateFile(basePath, fileName, projName) {
 
 function createRouteFile(routePath, fileName) {
   const targetRouterFile = path.join(routePath, fileName);
-  // if (!fs.existsSync(targetRouterFile)) {
-  //   fs.writeFileSync(targetRouterFile, '', 'utf8');
-  // }
   fs.writeFileSync(targetRouterFile, `'I love puppies!!!'`, 'utf8');
   return targetRouterFile;
 }

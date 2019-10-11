@@ -1,7 +1,7 @@
 {
-  "name": "commander-test",
+  "name": "midnight-express",
   "version": "1.0.0",
-  "description": "Learning Commanderjs",
+  "description": "Express.js Boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -15,8 +15,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "inquirer": "^7.0.0",
+    "listr": "^0.14.3",
     "lodash": "^4.17.15",
+    "meow": "^5.0.0",
     "mkdirp": "^0.5.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "ora": "^4.0.2"
   }
 }

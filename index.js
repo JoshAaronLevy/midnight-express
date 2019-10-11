@@ -14,7 +14,7 @@ let questions = [
   },
   {
     type: 'confirm',
-    name: 'routeFolder',
+    name: 'customRoute',
     message: 'Would you like to set up an initial custom route? (Recommended)',
   },
   {
@@ -22,7 +22,7 @@ let questions = [
     name: 'routeName',
     message: 'What is the name of your custom route? (i.e. dogs)',
     when: function(answers) {
-      return answers.routeFolder;
+      return answers.customRoute;
     }
   },
   {
@@ -94,6 +94,7 @@ let questions = [
 
 inquirer.prompt(questions).then(answers => {
   const projName = answers.project_name;
+  const customRoute = answers.routeName;
   console.log(JSON.stringify(answers, null, 2));
   checkRequestedInput(projName);
 });
@@ -105,9 +106,11 @@ function checkRequestedInput(projName) {
   createTemplateFile(basePath, '.gitignore');
 }
 
-function ensureDirectory(pathName) {
-  const pathToVerify = path.join(__dirname, pathName);
+function ensureDirectory(projName) {
+  const pathToVerify = path.join(__dirname, projName);
+  const routerPath = path.join(__dirname, projName, 'routes');
   mkdirp.sync(pathToVerify);
+  mkdirp.sync(routerPath);
   return pathToVerify;
 }
 

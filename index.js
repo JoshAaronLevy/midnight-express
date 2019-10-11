@@ -5,6 +5,7 @@ const mkdirp = require('mkdirp');
 const program = require('commander');
 ('use strict');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 
 let questions = [
   {
@@ -93,7 +94,7 @@ inquirer.prompt(questions).then(answers => {
   if (!fs.existsSync(pathToVerify)) {
     checkRequestedInput(projName, routeName);
   } else {
-    console.error(`Directory ${projName} already exists in ${__dirname}. Please try another name for the project.`)
+    console.error(chalk.red(`Directory ${projName} already exists in ${__dirname}. Please try another name for the project.`))
   }
 });
 

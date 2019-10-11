@@ -15,7 +15,7 @@ let questions = [
   {
     type: 'confirm',
     name: 'customRoute',
-    message: 'Would you like to set up an initial custom route? (Recommended)',
+    message: 'Would you like to set up an initial custom route? (default: puppies)',
   },
   {
     type: 'input',
@@ -94,24 +94,37 @@ let questions = [
 
 inquirer.prompt(questions).then(answers => {
   const projName = answers.project_name;
-  const customRoute = answers.routeName;
   console.log(JSON.stringify(answers, null, 2));
-  checkRequestedInput(projName);
+  checkRequestedInput(projName, answers);
 });
 
 function checkRequestedInput(projName) {
   const basePath = ensureDirectory(projName);
+  const routePath = ensureRouteDirectory(projName, 'routes');
+  // if (answers.customRoute) {
+  //   console.log('Creating custom route')
+  //   const customRouteName = answers.routeName;
+  //   createTemplateFile(routePath, `${customRouteName}.js`);
+  // } else {
+  //   console.log('Creating default route')
+  //   createTemplateFile(routePath, 'puppies.js');
+  // }
   createTemplateFile(basePath, 'index.js');
   createTemplateFile(basePath, 'README.md', projName);
   createTemplateFile(basePath, '.gitignore');
+  createRouteFile(routePath, 'puppies.js');
 }
 
 function ensureDirectory(projName) {
   const pathToVerify = path.join(__dirname, projName);
-  const routerPath = path.join(__dirname, projName, 'routes');
   mkdirp.sync(pathToVerify);
-  mkdirp.sync(routerPath);
   return pathToVerify;
+}
+
+function ensureRouteDirectory(projName) {
+  const routerPath = path.join(__dirname, projName, 'routes');
+  mkdirp.sync(routerPath);
+  return routerPath;
 }
 
 function createTemplateFile(basePath, fileName, projName) {
@@ -128,4 +141,13 @@ function createTemplateFile(basePath, fileName, projName) {
     console.error(`File ${targetFile} already exists`);
   }
   return targetFile;
+}
+
+function createRouteFile(routePath, fileName) {
+  const targetRouterFile = path.join(routePath, fileName);
+  // if (!fs.existsSync(targetRouterFile)) {
+  //   fs.writeFileSync(targetRouterFile, '', 'utf8');
+  // }
+  fs.writeFileSync(targetRouterFile, `'I love puppies!!!'`, 'utf8');
+  return targetRouterFile;
 }

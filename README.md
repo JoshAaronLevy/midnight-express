@@ -17,25 +17,49 @@ A Node/Express CLI with database integration
 ## Prompts
 
 1. Name your project
-1. Create a custom initial route name
-   a. This creates an example route with base API calls
-   b. Default is 'puppies'
-1. Choose a data source
-⋅⋅1. 'Static JSON' will generate a JSON file with sample data
-⋅⋅1. 'Database' will allow you to select a database to include in the dependencies
-⋅⋅1. 'Both' will create a JSON file and initialize database prompts
-1. Choose a database type (if selected either 'Database' or 'Both' as the data source)
-⋅⋅1. Select either 'SQL' or 'NoSQL'
-1. Choose one of the following SQL databases (if 'SQL' was selected as the database type)
-⋅⋅1. PostgreSQL
-⋅⋅1. SQLite
-⋅⋅1. MySQL
-⋅⋅1. MariaDB
-⋅⋅1. Other (Skips install, in case desired database is not in the list)
-1. Choose a NoSQL database (if 'NoSQL' was selected as the database type)
-⋅⋅1. MongoDB
-⋅⋅1. Other (Skips install, in case desired database is not in the list)
-1. Implement testing library with one of the following
-⋅⋅1. Mocha/Chai
-⋅⋅1. Jest
-⋅⋅1. None
+
+2. Create a custom initial route name
+
+   1. This creates an example route with base API calls
+
+   2. Default is 'puppies'
+
+3. Choose a data source
+
+   1. 'Static JSON' will generate a JSON file with sample data
+
+   2. 'Database' will allow you to select a database to include in the dependencies
+
+   3. 'Both' will create a JSON file and initialize database prompts
+
+4. Choose a database type (if selected either 'Database' or 'Both' as the data source)
+
+   1. 'SQL'
+
+   2. 'NoSQL'
+
+5. Choose one of the following SQL databases (if 'SQL' was selected as the database type)
+
+   1. PostgreSQL
+
+   2. SQLite
+
+   3. MySQL
+
+   4. MariaDB
+
+   5. Other (Skips install, in case desired database is not in the list)
+
+6. Choose a NoSQL database (if 'NoSQL' was selected as the database type)
+
+   1. MongoDB
+
+   2. Other (Skips install, in case desired database is not in the list)
+
+7. Implement testing library with one of the following
+
+   1. Mocha/Chai
+
+   2. Jest
+
+   3. None

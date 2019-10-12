@@ -8,6 +8,12 @@
 - [ ] Optional database (Single select)
 - [ ] Optional test library (Single select)
 
+## PP
+
+- [ ] npm init -y
+- [ ] create file contents/code
+- [ ] run commands (i.e. npm install `<packageName>`)
+
 ## User Stories
 
 - [ ] As a user, I can select either 

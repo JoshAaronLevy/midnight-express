@@ -1,7 +1,7 @@
 const handlebars = require('handlebars');
 
-const templateSpec = `
-const express = require('express');
+const templateSpec = 
+`const express = require('express');
 const router = express.Router();
 
 const queries = require('../queries');

@@ -1,40 +1,58 @@
-module.exports = [
-  `const express = require('express');
-  const app = express();
-  `,
-  {
-    keyName: 'useCORS',
-    prompt: `Would you like cors lite?`,
-    options: [
-      {
-        display: 'Yes',
-        code: `
-      app.use(require('cors')());
-      `
-      }
-    ]
-  }
-];
+const handlebars = require('handlebars');
 
-function renderTemplate(template) {
-  const output = [];
+module.exports = async (route) => {
+  const indexFile = await(route);
+  handlebars.compile(
+    `
+    const express = require('express');
+    const handlebars = require('handlebars');
+    const router = express.Router();
 
-  for (let i = 0; i < template.length; i++) {
-    if (typeof template[i] === 'string') {
-      output.push(template[i])
-    } else {
-      output.push({
-        type: 'list',
-        name: template[i].keyName,
-        message: template[i].prompt,
-        choices: template[i].options.map(opt => opt.display),
-        filter: function(selection) {
-          return template[i].options.find(opt => opt === selection);
-        }
-      });
-    }
-    
-  }
-  return 
+    const queries = require('../queries');
+
+    router.get('/', (request, response, next) => {
+      queries.list('${route}').then(${route} => {
+        response.json({
+          ${route}
+        });
+      }).catch(next);
+    });
+
+    router.get('/:id', (request, response, next) => {
+      queries.read(request.params.id).then(${route} => {
+        ${route}
+          ?
+          response.json({
+            ${route}
+          }) :
+          response.sendStatus(404)
+      }).catch(next);
+    });
+
+    router.post('/', (request, response, next) => {
+      queries.create(request.body).then(${route} => {
+        response.status(201).json({
+          ${route}: ${route}
+        });
+      }).catch(next);
+    });
+
+    router.put('/:id', (request, response, next) => {
+      queries.update(request.params.id, request.body).then(${route} => {
+        response.json({
+          ${route}: ${route}[0]
+        });
+      }).catch(next);
+    });
+
+    router.delete('/:id', (request, response, next) => {
+      queries.delete(request.params.id).then(() => {
+        response.sendStatus(204);
+      }).catch(next);
+    });
+
+    module.exports = router;
+    `
+  )
+  console.log(indexFile)
 }
-    

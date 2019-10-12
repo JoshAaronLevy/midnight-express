@@ -18,24 +18,24 @@ A Node/Express CLI with database integration
 
 1. Name your project
 1. Create a custom initial route name
-  a. This creates an example route with base API calls
-  b. Default is 'puppies'
+  1. This creates an example route with base API calls
+  1. Default is 'puppies'
 1. Choose a data source
-  a. 'Static JSON' will generate a JSON file with sample data
-  b. 'Database' will allow you to select a database to include in the dependencies
-  c. 'Both' will create a JSON file and initialize database prompts
+  1. 'Static JSON' will generate a JSON file with sample data
+  1. 'Database' will allow you to select a database to include in the dependencies
+  1. 'Both' will create a JSON file and initialize database prompts
 1. Choose a database type (if selected either 'Database' or 'Both' as the data source)
-  a. Select either 'SQL' or 'NoSQL'
+  1. Select either 'SQL' or 'NoSQL'
 1. Choose one of the following SQL databases (if 'SQL' was selected as the database type)
-  a. PostgreSQL
-  b. SQLite
-  c. MySQL
-  d. MariaDB
-  e. Other (Skips install, in case desired database is not in the list)
+  1. PostgreSQL
+  1. SQLite
+  1. MySQL
+  1. MariaDB
+  1. Other (Skips install, in case desired database is not in the list)
 1. Choose a NoSQL database (if 'NoSQL' was selected as the database type)
-  a. MongoDB
-  b. Other (Skips install, in case desired database is not in the list)
+  1. MongoDB
+  1. Other (Skips install, in case desired database is not in the list)
 1. Implement testing library with one of the following
-  a. Mocha/Chai
-  b. Jest
-  c. None
+  1. Mocha/Chai
+  1. Jest
+  1. None

@@ -10,7 +10,8 @@
 
 ## PP
 
-- [ ] npm init -y
+- [x] npm init -y
+- [x] git init cwd
 - [ ] create file contents/code
 - [ ] run commands (i.e. npm install `<packageName>`)
 

@@ -34,9 +34,9 @@ A Node/Express CLI with database integration
 
 4. Choose a database type (if selected either 'Database' or 'Both' as the data source)
 
-   1. 'SQL'
+   1. SQL
 
-   2. 'NoSQL'
+   2. NoSQL
 
 5. Choose one of the following SQL databases (if 'SQL' was selected as the database type)
 

@@ -6,7 +6,6 @@ program
   .command('create')
   .alias('c')
   .description('Create new Express project')
-
   .action(function () {
     create();
   });

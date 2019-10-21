@@ -3,7 +3,7 @@ module.exports = function createPackageJsonContent(projName) {
 `{
   "name": "${projName}",
   "version": "0.1.0",
-  "description": "${projName} - Created with knex-express CLI",
+  "description": "${projName} - Created with midnight-express CLI",
   "license": "ISC",
   "main": "index.js",
   "scripts": {
